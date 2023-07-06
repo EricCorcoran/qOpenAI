@@ -16,7 +16,7 @@ auth:(!/)flip 2 cut (
     `$"OpenAI-Organization";.config.orgid;
     `$"Content-Type";.h.ty`json);
 
-body:{[model;role;temp;content] (!/)flip 2 cut (
+body:{[model;role;temp;content](!/)flip 2 cut (
     `model;model;
     `messages;enlist `role`content!(role;content);
     `temperature;temp)};
@@ -27,16 +27,19 @@ ibody:{[p;n;s] (!/)flip 2 cut (
     `size;s)};
 
 / .openai.chatgpt["gpt-3.5-turbo";"user";0.7f;"Who created kdb+?"]
-chatgpt:{[model;role;temp;content]
-    @/[.j.k .rest.request[`POST;.config.url;paths[`chatgpt];auth;.j.j body[model;role;temp;content]];`choices`message`content]
- };
+/ model (string)
+/ role (string)
+/ temp (float)
+/ content (string)
+chatgpt:{[model;role;temp;content]@/[.j.k .rest.request[`POST;.config.url;paths[`chatgpt];auth;.j.j body[model;role;temp;content]];`choices`message`content]};
 
-getModels:{[]
-    @/[.j.k .rest.request[`GET;.config.url;paths[`models];auth;()];`data]
- };
+/ .openai.getModels[]
+getModels:{@/[.j.k .rest.request[`GET;.config.url;paths[`models];auth;()];`data]};
 
-createImage:{[prompt;n;size]
-    @/[.j.k .rest.request[`POST;.config.url;paths[`image];auth;.j.j ibody[prompt;n;size]];`data`url]
- };
+/ .openai.createImage["a cartoon dog";3;"1024x1024"]
+/ prompt (string)
+/ number of images (int)
+/ size of images (string)
+createImage:{[prompt;n;size]@/[.j.k .rest.request[`POST;.config.url;paths[`image];auth;.j.j ibody[prompt;n;size]];`data`url]};
 
 \d .
