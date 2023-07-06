@@ -2,6 +2,9 @@
 
 q/kdb+ library to interact with OpenAI API
 
+#### Configuration
+Add OpenAI API Key and Organisation ID to config.q
+#### Models
 Get list of available models
 ```
 q).openai.getModels[]
@@ -19,6 +22,7 @@ id                             object  created      owned_by          permission
 "ada"                          "model" 1.649357e+09 "openai"          +`id`object`created`allow_create_engine`allow_sampling`allow_logprobs`allow_search_indices`allow_view`allow_fine_tuning`organiz..
 "babbage-code-search-text"     "model" 1.651173e+09 "openai-dev"      +`id`object`created`allow_create_engine`allow_sampling`allow_logprobs`allow_search_indices`allow_view`allow_fine_tuning`organiz..
 ```
+#### GPT Models
 Get list of GPT models
 ```
 q)?[.openai.getModels[];enlist (like;`id;"gpt*");0b;()]
@@ -30,13 +34,13 @@ id                       object  created      owned_by          permission      
 "gpt-3.5-turbo-16k-0613" "model" 1.685474e+09 "openai"          +`id`object`created`allow_create_engine`allow_sampling`allow_logprobs`allow_search_indices`allow_view`allow_fine_tuning`organization`..
 "gpt-3.5-turbo-16k"      "model" 1.683758e+09 "openai-internal" +`id`object`created`allow_create_engine`allow_sampling`allow_logprobs`allow_search_indices`allow_view`allow_fine_tuning`organization`..
 ```
-
-Send prompt to Chatgpt
+#### ChatGPT Prompt
+Send prompt to chatgpt 3.5 turbo
 ```
 q).openai.chatgpt["gpt-3.5-turbo";"user";0.7f;"Who created kdb+?"]
 "kdb+ was created by Arthur Whitney, a computer programmer and the founder of Kx Systems."
 ```
-Create Images
+#### Create Images
 ```
 q).openai.createImage["a cartoon dog";3;"1024x1024"]
 ```
