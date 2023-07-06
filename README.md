@@ -3,7 +3,8 @@
 q/kdb+ library to interact with OpenAI API
 
 #### Configuration
-Add OpenAI API Key and Organisation ID to config.q
+Obtain an OpenAI API Key and Organization ID from openai.com and add them to config.q
+
 #### Models
 Get list of available models
 ```
